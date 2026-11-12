@@ -31,14 +31,14 @@ main{position:relative;z-index:1}
 .links button::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--sun);transform:scaleX(0);transform-origin:left;transition:transform .3s}
 .links button:hover{color:#fff}.links button:hover::after{transform:scaleX(1)}
 .links button:focus-visible,.brand:focus-visible,.card:focus-visible{outline:2px solid var(--sun);outline-offset:3px}
-.hero{min-height:100svh;display:flex;flex-direction:column;padding-top:clamp(84px,14vh,140px);padding-bottom:clamp(18px,3vh,32px);position:relative}
-.hero .copy{display:flex;flex-direction:column;align-items:flex-start;max-width:min(820px,100%)}
+.hero{min-height:100svh;display:flex;flex-direction:column;gap:1.4rem;padding-top:clamp(84px,14vh,140px);padding-bottom:clamp(18px,3vh,32px);position:relative}
+.hero .copy{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-start;max-width:min(820px,100%)}
 .hero h1{font-weight:300;font-size:clamp(2.8rem,min(7.4vw,14vh),7.6rem);line-height:1;letter-spacing:-.045em;color:#fff;margin:0 0 .3em;text-wrap:balance;text-shadow:0 2px 40px rgba(0,0,0,.55)}
 .hero h1 em{font-style:normal;font-weight:600;background:linear-gradient(100deg,#fff 20%,#ffcf80 70%,#ff9a3c);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .hero p{max-width:29em;font-size:clamp(1rem,1.4vw,1.2rem);color:var(--body);margin:0 0 1.8rem;text-shadow:0 1px 20px rgba(0,0,0,.8)}
 .hero::before{content:"";position:absolute;inset:0 -50vw 0 -50vw;background:linear-gradient(90deg,rgba(3,4,10,.8),rgba(3,4,10,.35) 45%,transparent 70%);pointer-events:none;z-index:0}
 .hero>*{position:relative;z-index:1}
-.feat{margin-top:auto;margin-bottom:1.4rem;max-width:400px;display:flex;flex-direction:column;align-items:flex-start;gap:.35rem}
+.feat{flex:0 0 auto;margin-top:auto;margin-bottom:.4rem;max-width:400px;display:flex;flex-direction:column;align-items:flex-start;gap:.35rem}
 .feat .fix{font-size:.7rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--c,var(--sun));font-variant-numeric:tabular-nums}
 .feat h2{margin:0;font-weight:300;font-size:clamp(1.8rem,3.2vw,2.8rem);letter-spacing:-.03em;color:#fff;line-height:1.05}
 .feat p{margin:0;font-size:.95rem;color:var(--body);text-shadow:0 1px 16px rgba(0,0,0,.8)}
@@ -48,7 +48,7 @@ main{position:relative;z-index:1}
 .card.on{border-color:var(--c);background:rgba(18,22,44,.8)}
 .card.on::before{transform:scaleX(1)}
 .rail-head{display:flex;justify-content:space-between;align-items:baseline;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--dim);margin-bottom:.8rem;position:relative;z-index:2}
-.rail{display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;position:relative;z-index:2;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent}
+.rail{flex:0 0 auto;display:flex;gap:10px;overflow-x:auto;padding:4px 2px 10px;position:relative;z-index:2;scrollbar-width:thin;scrollbar-color:rgba(255,255,255,.2) transparent}
 .card{flex:1 0 108px;display:flex;flex-direction:column;gap:.55rem;text-align:left;font:inherit;color:inherit;cursor:pointer;background:rgba(10,12,26,.55);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line);border-radius:14px;padding:12px 12px 14px;position:relative;overflow:hidden;transition:transform .35s cubic-bezier(.2,.7,.2,1),border-color .3s,background .3s}
 .card::before{content:"";position:absolute;left:0;right:0;top:0;height:2px;background:var(--c);transform:scaleX(0);transform-origin:left;transition:transform .4s}
 .card:hover{transform:translateY(-6px);border-color:rgba(255,255,255,.28);background:rgba(16,19,38,.75)}
@@ -129,7 +129,7 @@ footer p{max-width:42em;margin:0}
       <p>One star, eight planets, five dwarf planets and hundreds of moons. Scroll outward from the Sun and meet every world.</p>
       <button class="begin" id="begin" type="button">Begin the journey <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M8 2v12M3 9l5 5 5-5"/></svg></button>
     </div>
-    <div class="feat" id="feat" aria-live="polite"><div class="fix" id="fIx"></div><h2 id="fName"></h2><p id="fText"></p><button class="ex" id="fGo" type="button"></button></div>
+    <div class="feat" id="feat" aria-live="polite"><h2 id="fName"></h2><p id="fText"></p><button class="ex" id="fGo" type="button"></button></div>
     <div class="rail-head"><span>The collection</span><span>Hover or tap to preview</span></div>
     <div class="rail" id="rail"></div>
   </section>
@@ -311,7 +311,7 @@ STOPS.forEach(function(s,i){
 /* ---------- gallery rail + header ---------- */
 var KIND=['Star','Planet','Planet','Planet','Planet','Asteroid belt','Planet','Planet','Planet','Planet','Dwarf planets','Comets'],railEl=$('#rail'),thumbs={};
 STOPS.forEach(function(s,i){var b=document.createElement('button');b.className='card';b.type='button';b.style.setProperty('--c',s.c);b.setAttribute('aria-label','Go to '+s.nav);
-  b.innerHTML='<canvas width="112" height="112"></canvas><div><div class="ix">'+String(i+1).padStart(2,'0')+'</div><b>'+esc(s.nav)+'</b></div><span>'+KIND[i]+'</span>';
+  b.innerHTML='<canvas width="112" height="112"></canvas><b>'+esc(s.nav)+'</b>';
   b.dataset.id=s.id;railEl.appendChild(b);thumbs[s.id]=b.querySelector('canvas')});
 document.addEventListener('click',function(e){var t=e.target.closest('[data-go]');if(!t)return;var id=t.dataset.go,el=id==='top'?document.body:document.getElementById(id);if(id==='top')window.scrollTo({top:0,behavior:REDUCED?'auto':'smooth'});else if(el)el.scrollIntoView({behavior:REDUCED?'auto':'smooth',block:id==='sun'?'center':'start'})});
 var tb=$('#topbar');function ts(){tb.classList.toggle('solid',window.scrollY>60)}addEventListener('scroll',ts,{passive:true});ts();
@@ -519,7 +519,7 @@ var cards=Array.prototype.slice.call(document.querySelectorAll('.card')),autoOn=
 function pick(id,user){
   heroId=id;var i=STOPS.map(function(q){return q.id}).indexOf(id),s=STOPS[i],f=$('#feat');
   cards.forEach(function(c){c.classList.toggle('on',c.dataset.id===id)});
-  f.style.setProperty('--c',s.c);$('#fIx').textContent=String(i+1).padStart(2,'0')+' / '+STOPS.length+' · '+KIND[i];$('#fName').textContent=s.name;
+  f.style.setProperty('--c',s.c);$('#fName').textContent=s.name;
   $('#fText').textContent=s.lead.split(/(?<=\.)\s/)[0];$('#fGo').innerHTML='Explore '+esc(s.nav)+' <span aria-hidden="true">→</span>';
   if(!REDUCED)gsap.fromTo('#feat>*',{y:14,opacity:0},{y:0,opacity:1,duration:.6,stagger:.05,ease:'power3.out',overwrite:true});
   if(heroOn)go('hero',false,1.8);
